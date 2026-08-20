@@ -1,0 +1,17 @@
+{
+  "name": "rivne-alert-writer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Записує стан тривоги Рівненського району в Firebase RTDB",
+  "main": "update-alert.js",
+  "scripts": {
+    "start": "node update-alert.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

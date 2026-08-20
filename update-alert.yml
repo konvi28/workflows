@@ -1,0 +1,29 @@
+name: Update Rivne district alert status
+
+on:
+  schedule:
+    # Кожні 5 хвилин. Синтаксис cron, час UTC.
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {} # дозволяє запустити вручну з вкладки Actions
+
+jobs:
+  update-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: .
+
+      - name: Run alert update script
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          ALERTS_TOKEN: ${{ secrets.ALERTS_TOKEN }}
+        run: node update-alert.js
